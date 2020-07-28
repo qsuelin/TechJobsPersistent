@@ -1,6 +1,6 @@
---Part 1
 
---Part 2
+DESCRIBE Jobs;
 
---Part 3
+SELECT name FROM Employers WHERE Location == St.Louis;
 
+SELECT Name, Description FROM

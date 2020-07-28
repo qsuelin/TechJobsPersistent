@@ -15,12 +15,11 @@
         <span asp-validation-for="EmployerId"></span>
     </div>
     <div class="form-group">
-            @foreach (Skill skill in Model.Skills)
+            @foreach (var skill in Model.Skills)
             {
                 <label>@skill.Name</label>
                 <input type="checkbox" name="selectedSkills" value="@skill.Id" />
             }
-            <span asp-validation-for="SkillId"></span>
             <a asp-controller="Skill" asp-action="Add">Add Skill</a>
 
         </div> 

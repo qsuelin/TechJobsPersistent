@@ -40,7 +40,7 @@ namespace TechJobsPersistent.Controllers
 
         [HttpPost]
         //[Route("/Index")]
-        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel, string[] selectedSkills)
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel, int[] selectedSkills)
         {
             if (ModelState.IsValid)
             {
@@ -48,22 +48,26 @@ namespace TechJobsPersistent.Controllers
                 Job newJob = new Job
                 {
                     Name = addJobViewModel.Name,
-                    Employer = theEmployer
+                    EmployerId = theEmployer.Id,
+                    //Employer = theEmployer
                 };
 
-                foreach (string skillStr in selectedSkills)
+
+                foreach (int skillStr in selectedSkills)
                 {
                     JobSkill newJobSkill = new JobSkill
                     {
                         JobId = newJob.Id,
-                        SkillId = int.Parse(skillStr)
+                        Job = newJob,
+                        SkillId = skillStr
                     };
                     context.JobSkills.Add(newJobSkill);
                 }
 
                 context.Jobs.Add(newJob);
+
                 context.SaveChanges();
-                return Redirect("Index");
+                return Redirect("/Home");
 
             }
             return View("AddJob", addJobViewModel);
